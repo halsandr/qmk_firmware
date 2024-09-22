@@ -12,13 +12,18 @@ SWAP_HANDS_ENABLE = no      # Enable one-hand typing
 OLED_ENABLE = yes            # OLED display
 CAPS_WORD_ENABLE = yes      # Enable Caps Word
 
+WPM_ENABLE = yes            # Enable Words Per Minute
+WPM_SAMPLE_SECONDS = 10     # This defines how many seconds of typing to average, when calculating WPM
+WPM_LAUNCH_CONTROL = yes    # WPM values will be calculated using partial buffers when typing begins
+
 # If you want to change the display of OLED, you need to change here
-SRC +=  ./lib/layer_state_reader.c \
-        ./lib/logo_reader.c \
-        ./lib/rgb_state_reader.c \
-        ./lib/keylogger.c \
-        # ./lib/timelogger.c \
+SRC +=  ./lib/logo_reader.c \
+        ./lib/wpm_reader.c \
+        ./lib/layer_state_reader.c \
         # ./lib/mode_icon_reader.c \
+        # ./lib/timelogger.c \
+        # ./lib/rgb_state_reader.c \
+        # ./lib/keylogger.c \
         # ./lib/host_led_state_reader.c \
 
-CONVERT_TO=helios
+CONVERT_TO = helios
