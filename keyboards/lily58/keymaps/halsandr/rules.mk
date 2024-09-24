@@ -20,6 +20,7 @@ WPM_LAUNCH_CONTROL = yes    # WPM values will be calculated using partial buffer
 SRC +=  ./lib/logo_reader.c \
         ./lib/wpm_reader.c \
         ./lib/layer_state_reader.c \
+        ./lib/base_2_reader.c \
         # ./lib/mode_icon_reader.c \
         # ./lib/timelogger.c \
         # ./lib/rgb_state_reader.c \
