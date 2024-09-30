@@ -17,10 +17,11 @@ WPM_SAMPLE_SECONDS = 10     # This defines how many seconds of typing to average
 WPM_LAUNCH_CONTROL = yes    # WPM values will be calculated using partial buffers when typing begins
 
 # If you want to change the display of OLED, you need to change here
-SRC +=  ./lib/logo_reader.c \
-        ./lib/wpm_reader.c \
+SRC +=  ./lib/wpm_reader.c \
         ./lib/layer_state_reader.c \
         ./lib/base_2_reader.c \
+        ./lib/wpm_graph.c \
+        # ./lib/logo_reader.c \
         # ./lib/mode_icon_reader.c \
         # ./lib/timelogger.c \
         # ./lib/rgb_state_reader.c \

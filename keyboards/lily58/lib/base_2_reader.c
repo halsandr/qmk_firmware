@@ -3,7 +3,8 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-char keylog_b2_str[17] = {};
+char keylog_b2_str[22] = {};
+char keylog_b2_raw[17] = {};
 uint16_t sum = 0;
 
 void set_keylog_b10(uint16_t keycode) {
@@ -12,7 +13,9 @@ void set_keylog_b10(uint16_t keycode) {
     // skip 39 as 0 is already in cur
     if ((29 < keycode) && (keycode < 39)) {
         cur = keycode - 29;
-    } else if (keycode < 60) {
+    } else if (keycode == 39) {
+        cur = 0;
+    } else {
         sum = 0;
 
         // Clear keylog string
@@ -29,15 +32,16 @@ void set_keylog_b10(uint16_t keycode) {
         sum = 0;
     }
 
-    // Itterate through the chars of keylog_b2_str
+    // Itterate through the chars of keylog_b2_raw
     // replace each char with the base 2 representation of sum
     // in the correct order
     for (int i = 0; i < 16; i++) {
-        keylog_b2_str[i] = (sum & (1 << (15 - i))) ? '1' : '0';
+        keylog_b2_raw[i] = (sum & (1 << (15 - i))) ? '1' : '0';
     }
+    // Null terminate the string
+    keylog_b2_raw[16] = '\0';
 
-    // always null terminate the string
-    keylog_b2_str[16] = '\0';
+    sprintf(keylog_b2_str, "BIN: %s", keylog_b2_raw);
 }
 
 const char *read_base_2(void) {
