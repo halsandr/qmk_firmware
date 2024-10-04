@@ -10,6 +10,7 @@ uint16_t timer = 0;
 char wpm_text[5];
 uint8_t x = 31;
 uint8_t currwpm = 0;
+uint8_t capped_currwpm = 0;
 uint8_t vert_count = 0; 
 
 //=============  USER CONFIG PARAMS  ===============
@@ -26,9 +27,14 @@ void draw_wpm_graph(void) {
 
     //check if it's been long enough before refreshing graph
 	if(timer_elapsed(timer) > graph_refresh_interval){
-	
+		// cap the current WPM value at the max WPM value
+		capped_currwpm = currwpm > max_wpm ? max_wpm : currwpm;
+
 		// main calculation to plot graph line
-		x = 32 - ((currwpm / max_wpm) * 32);
+		x = 32 - ((capped_currwpm / max_wpm) * 32);
+
+		// make sure that the graph line doesn't go off the screen
+		if (x < 1) { x = 1; }
 		
 		//first draw actual value line
 		for(int i = 0; i <= graph_line_thickness - 1; i++){
